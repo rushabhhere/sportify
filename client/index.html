@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+    ></script>
+    <link rel="stylesheet" href="./static/css/styles.css" />
+    <title>sportify</title>
+  </head>
+
+  <body>
+    <div class="row no-gutters">
+      <!-- leftside -->
+      <div class="col-sm-8 leftside">
+        <div class="container">
+          <div class="row justify-content-between">
+            <!-- navbar-brand -->
+            <div class="col-4 brand">
+              <a href="#">sportify</a>
+              <img src="./static/assets/logo.png" alt="" />
+            </div>
+            <!-- navbar-search-->
+            <div class="col-4">
+              <div class="input-group searchbar">
+                <input
+                  type="search"
+                  class="form-control rounded dark"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                />
+                <button id="search-button" type="button" class="btn btn-dark">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- activity card start-->
+            <div class="card activity-card border-0">
+              <div class="card-header">
+                Activity created by <b>Om Kamath</b>
+                <span class="badge bg-danger rounded-pill" id="activityJoinees"
+                  >0/10 Joinees</span
+                >
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Anybody up for a ride today evening?</h5>
+                <div class="card-text">
+                  <p><b>Date and Time:</b> March 11, 2022 @ 17:00</p>
+                  <p><b>Activity type:</b> Cycling</p>
+                  <p><b>Location:</b> Shivaji Park, Mumbai</p>
+                  <a
+                    href="#"
+                    class="btn btn-outline-dark btn-rounded"
+                    data-mdb-ripple-color="dark"
+                    >I'm joining</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- activity card end-->
+            <!-- activity card start -->
+            <div class="card activity-card border-0">
+              <div class="card-header">
+                Activity created by <b>Rushabh Javeri</b>
+                <span class="badge bg-danger rounded-pill" id="activityJoinees"
+                  >12/20 Joinees</span
+                >
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  Join me to improve your basketball skills 🏀
+                </h5>
+                <div class="card-text">
+                  <p><b>Date and Time:</b> March 13, 2022 @ 16:00</p>
+                  <p><b>Activity type:</b> Basketball</p>
+                  <p><b>Location:</b> Ghatkopar, Mumbai</p>
+                  <a
+                    href="#"
+                    type="button"
+                    class="btn btn-outline-dark btn-rounded"
+                    data-mdb-ripple-color="dark"
+                  >
+                    I'm joining
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- activity card end-->
+            <!-- activity card start -->
+            <div class="card activity-card border-0">
+              <div class="card-header">
+                Activity created by <b>Rushabh Javeri</b>
+                <!-- <span class="badge bg-secondary">New</span> -->
+                <span class="badge bg-danger rounded-pill" id="activityJoinees"
+                  >5/10 Joinees</span
+                >
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  Join me to improve your basketball skills 🏀
+                </h5>
+                <div class="card-text">
+                  <p><b>Date and Time:</b> March 13, 2022 @ 16:00</p>
+                  <p><b>Activity type:</b> Basketball</p>
+                  <p><b>Location:</b> Ghatkopar, Mumbai</p>
+                  <a
+                    href="#"
+                    type="button"
+                    class="btn btn-outline-dark btn-rounded"
+                    data-mdb-ripple-color="dark"
+                  >
+                    I'm joining
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- activity card end-->
+          </div>
+        </div>
+      </div>
+
+      <!-- rightside -->
+      <div class="col-sm-4 rightside">
+        <div class="row justify-content-between">
+          <div class="col-4">
+            <!-- date and time -->
+            <div class="DandT">
+              <span id="clock"></span>
+              <span><i class="fa-solid fa-clock"></i></span>
+              <h6 id="date"></h6>
+            </div>
+          </div>
+          <div class="col-6">
+            <!-- user-profile -->
+            <div class="row">
+              <div class="col userdetails">
+                <p class="username"><b>Om Kamath</b></p>
+                <p class="userlocation">Mumbai</p>
+              </div>
+              <div class="col">
+                <img
+                  class="rounded-circle w-50"
+                  src="https://images.unsplash.com/profile-1601894503666-f77483cf2165image?dpr=2&auto=format&fit=crop&w=150&h=150&q=60&crop=faces&bg=fff"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- activity-creation  -->
+        <div class="card create-event border-0 shadow-3-soft text-center">
+          <div class="card-header">
+            <h1>Create Activity</h1>
+          </div>
+          <div class="card-body">
+            <form method="post" action="/">
+              <div class="card-text">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Activity name"
+                    id="activityTitle"
+                    name="title"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <select
+                    class="form-control"
+                    id="activityType"
+                    name="type"
+                    required
+                  >
+                    <option value="" disabled selected>Activity type</option>
+                    <option>Cycling</option>
+                    <option>Running</option>
+                    <option>Swimming</option>
+                    <option>Basketball</option>
+                    <option>Football</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="location"
+                      id="activityLocation"
+                      placeholder="Location"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <input
+                    type="datetime-local"
+                    name="datetime"
+                    class="form-control"
+                    id="activityTime"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    name="maxJoinees"
+                    min="1"
+                    class="form-control"
+                    id="activityMaxJoinees"
+                    placeholder="Max. joinees"
+                    required
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-dark btn-rounded"
+                id="create-activity-button"
+              >
+                Create activity
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    // date and time logic
+    function clock() {
+      let date = new Date();
+      let hrs = date.getHours();
+      let mins = date.getMinutes();
+      let period = 'AM';
+
+      if (hrs == 0) hrs = 12;
+      if (hrs > 12) {
+        hrs = hrs - 12;
+        period = 'PM';
+      }
+
+      hrs = hrs < 10 ? `0${hrs}` : hrs;
+      mins = mins < 10 ? `0${mins}` : mins;
+
+      let time = `${hrs}:${mins} ${period}`;
+      setInterval(clock, 1000);
+      document.getElementById('clock').innerText = time;
+
+      (months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ]),
+        (days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+
+      document.getElementById('date').innerText = `${days[date.getDay()]}, ${
+        months[date.getMonth()]
+      } ${date.getDate()}, ${date.getFullYear()}`;
+    }
+
+    clock();
+  </script>
+</html>

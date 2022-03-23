@@ -1,0 +1,114 @@
+.leftside,
+.rightside {
+  height: 100vh;
+  padding-top: 30px;
+}
+
+.leftside {
+  background-color: #b3ffbf;
+  height: 100%;
+  position: absolute;
+  overflow-y: scroll;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.rightside {
+  background-color: #ffffff;
+  /* overflow-y: hidden; */
+  position: absolute;
+  right: 0;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.activity-card {
+  margin-top: 15px;
+  padding: 0;
+}
+
+.create-event {
+  margin-top: 100px;
+  margin-right: 10px;
+}
+
+.searchbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.brand {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  align-items: center;
+}
+
+.brand a {
+  color: #000;
+}
+
+.username {
+  margin-bottom: 0px;
+  text-align: end;
+}
+
+.userlocation {
+  margin-bottom: 0px;
+  text-align: end;
+  color: darkgray;
+}
+
+.register-form {
+  margin: auto;
+  margin-top: 55px;
+  width: 40%;
+  padding: 10px 20px;
+}
+
+.register-body {
+  height: 100%;
+  background-color: #b3ffbf;
+}
+
+.register {
+  height: 100%;
+}
+
+.profile-body {
+  height: 100vh;
+  background-color: #b3ffbf;
+}
+
+.profile-card {
+  margin: auto;
+  margin-top: 75px;
+  width: 40%;
+  padding: 10px 20px;
+}
+
+#date {
+  color: darkgray;
+}
+
+#clock {
+  font-size: 20px;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.form-control:focus {
+  border-color: #28a745 !important;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+form .card-text {
+  margin-bottom: 1em !important;
+}
+
+.DandT {
+  pointer-events: none;
+}

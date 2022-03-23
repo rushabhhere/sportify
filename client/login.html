@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+    ></script>
+    <link rel="stylesheet" href="./static/css/styles.css" />
+    <title>sportify | Sign In</title>
+  </head>
+
+  <body class="register-body">
+    <div class="container register">
+      <div class="row">
+        <!-- navbar-brand -->
+        <div class="col-4 brand">
+          <a href="/">sportify</a>
+          <img src="./static/assets/logo.png" alt="" />
+        </div>
+      </div>
+      <div class="card register-form">
+        <div class="card-body">
+          <h3 class="card-title"><b>Login</b></h3>
+          <form>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input
+                type="email"
+                id="login-email"
+                class="form-control border-bottom"
+                required
+              />
+              <label class="form-label" for="login-email">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input
+                type="password"
+                id="login-pass"
+                class="form-control border-bottom"
+                required
+              />
+              <label class="form-label" for="login-pass" data-error="wrong"
+                >Password</label
+              >
+            </div>
+
+            <!-- Reset Password -->
+            <!-- <div class="row mb-4">
+                        <div class="col">
+                            <a href="#!">Reset password</a>
+                        </div>
+                    </div> -->
+
+            <!-- Submit button -->
+            <div class="row mb-2">
+              <div class="col d-flex justify-content-center">
+                <button
+                  id="sign-in-button"
+                  type="submit"
+                  class="btn btn-dark btn-block w-25"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+
+            <!-- Sign up -->
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <a href="/register">Don't have an account? Sign up</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
