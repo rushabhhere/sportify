@@ -222,7 +222,13 @@
       };
 
       $scope.registerUser = async () => {
-        // * validations *
+        if ($scope.registrar.password === undefined) {
+          return alert('password invalid');
+        }
+
+        if ($scope.registrar.password2 !== $scope.registrar.password) {
+          return alert('passwords do not match');
+        }
 
         const reqBody = JSON.parse(JSON.stringify($scope.registrar));
 
