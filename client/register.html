@@ -216,7 +216,7 @@
         navigator.geolocation.getCurrentPosition(({ coords }) => {
           $scope.registrar.location = {
             type: 'Point',
-            coords: [coords.latitude, coords.longitude],
+            coordinates: [coords.latitude, coords.longitude],
           };
         });
       };

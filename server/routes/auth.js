@@ -30,10 +30,7 @@ router.post('/register', async (req, res) => {
       username,
       password,
       name,
-      location: {
-        type: location.type,
-        coordinates: [location.coords[0], location.coords[1]],
-      },
+      location,
       gender,
       interests,
     });
