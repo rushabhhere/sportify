@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
@@ -23,7 +24,7 @@
     <title>sportify</title>
   </head>
 
-  <body>
+  <body ng-app="sportify-home">
     <div class="row no-gutters">
       <!-- leftside -->
       <div class="col-sm-8 leftside">
@@ -150,15 +151,15 @@
           </div>
           <div class="col-6">
             <!-- user-profile -->
-            <div class="row">
+            <div class="row" ng-controller="get-profile">
               <div class="col userdetails">
-                <p class="username"><b>Om Kamath</b></p>
-                <p class="userlocation">Mumbai</p>
+                <p class="name"><b>{{name}}</b></p>
+                <p class="username">{{username}}</p>
               </div>
               <div class="col">
                 <img
                   class="rounded-circle w-50"
-                  src="https://images.unsplash.com/profile-1601894503666-f77483cf2165image?dpr=2&auto=format&fit=crop&w=150&h=150&q=60&crop=faces&bg=fff"
+                  ng-src="{{profileImage}}"
                   alt=""
                 />
               </div>
@@ -254,7 +255,8 @@
     </div>
   </body>
 
-  <script type="text/javascript">
+  <script src="https://js.arcgis.com/4.23/"></script>
+  <script>
     // date and time logic
     function clock() {
       let date = new Date();
@@ -297,5 +299,32 @@
     }
 
     clock();
+
+    const app = angular.module('sportify-home', []);
+    app.controller('get-profile', ($scope, $http) => {
+      const init = () => {
+        const request = {
+          url: 'http://localhost:7878/api/auth/profile',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('sportify-token')}`,
+          },
+        };
+
+        $http(request).then(
+          function success({ data }) {
+            console.log(data);
+            $scope.name = data.name;
+            $scope.username = data.username;
+            $scope.profileImage = data.profileImage;
+          },
+          function failure(response) {
+            console.error(response);
+          }
+        );
+      };
+
+      init();
+    });
   </script>
 </html>

@@ -30,7 +30,10 @@ router.post('/register', async (req, res) => {
       username,
       password,
       name,
-      location,
+      location: {
+        type: location.type,
+        coordinates: [location.coords[0], location.coords[1]],
+      },
       gender,
       interests,
     });
@@ -92,6 +95,7 @@ router.get('/profile', async (req, res) => {
       interests: user.interests,
       gender: user.gender,
       location: user.location,
+      name: user.name,
     });
   } catch (err) {
     if (err.message === 'invalid token') {
