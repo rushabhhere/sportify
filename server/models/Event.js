@@ -35,4 +35,9 @@ const eventSchema = new Schema({
   },
 });
 
+eventSchema.pre('save', function (next) {
+  this.joinees.push(this.createdBy);
+  next();
+});
+
 module.exports = model('Event', eventSchema);

@@ -21,8 +21,6 @@ router.post('/', async (req, res) => {
       createdBy,
     });
 
-    console.log(event);
-
     res
       .status(201)
       .json({ status: 'ok', message: 'event created', data: event });
@@ -30,6 +28,30 @@ router.post('/', async (req, res) => {
     console.error(JSON.stringify(err));
     res.status(500).json({ status: 'error', error: err.message });
   }
+});
+
+router.patch('/add-joinee/:event_id', async (req, res) => {
+  const { event_id } = req.params;
+  const { user_id } = req.body;
+
+  const event = await Event.updateOne(
+    { _id: event_id },
+    { $addToSet: { joinees: user_id } }
+  );
+
+  res.json({ status: 'ok', message: 'added one user' });
+});
+
+router.patch('/delete-joinee/:event_id', async (req, res) => {
+  const { event_id } = req.params;
+  const { user_id } = req.body;
+
+  const event = await Event.updateOne(
+    { _id: event_id },
+    { $pull: { joinees: user_id } }
+  );
+
+  res.json({ status: 'ok', message: 'deleted one user' });
 });
 
 module.exports = router;

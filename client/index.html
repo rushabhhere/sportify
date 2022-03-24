@@ -32,7 +32,7 @@
           <div class="row justify-content-between">
             <!-- navbar-brand -->
             <div class="col-4 brand">
-              <a href="#">sportify</a>
+              <a href="/">sportify</a>
               <img src="/assets/logo.png" alt="" />
             </div>
             <!-- navbar-search-->
@@ -53,16 +53,15 @@
           </div>
 
           <div class="row">
-            <!-- activity card start-->
             <div
               class="card activity-card border-0"
               ng-repeat="event in events | reverse"
             >
               <div class="card-header">
                 Event created by <b>{{event.createdBy.name}}</b>
-                <span class="badge bg-danger rounded-pill" id="activityJoinees"
-                  >{{event.joinees.length}}/10 Joinees</span
-                >
+                <span class="badge bg-danger rounded-pill" id="activityJoinees">
+                  {{event.joinees.length}}/{{event.maxJoinees}} Joinees
+                </span>
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{event.title}}</h5>
@@ -74,16 +73,41 @@
                   </p>
                   <p><b>Activity type: </b> {{event.type}}</p>
                   <p><b>Location:</b> {{event.location}}</p>
-                  <a
-                    href="#"
-                    class="btn btn-outline-dark btn-rounded"
-                    data-mdb-ripple-color="dark"
-                    >I'm joining</a
+                  <div
+                    ng-if="event.joinees.length === event.maxJoinees && !event.joinees.includes(profile.id)"
                   >
+                    <button
+                      class="btn btn-outline-dark btn-rounded"
+                      data-mdb-ripple-color="dark"
+                      ng-click="currentUserJoins(event._id)"
+                      disabled
+                    >
+                      I'm joining
+                    </button>
+                  </div>
+                  <div
+                    ng-if="!event.joinees.includes(profile.id) && event.joinees.length < event.maxJoinees"
+                  >
+                    <button
+                      class="btn btn-outline-success btn-rounded"
+                      data-mdb-ripple-color="dark"
+                      ng-click="currentUserJoins(event._id)"
+                    >
+                      I'm joining
+                    </button>
+                  </div>
+                  <div ng-if="event.joinees.includes(profile.id)">
+                    <button
+                      class="btn btn-outline-danger btn-rounded"
+                      data-mdb-ripple-color="dark"
+                      ng-click="currentUserLeaves(event._id)"
+                    >
+                      I'm leaving
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- activity card end-->
           </div>
         </div>
       </div>
@@ -102,21 +126,38 @@
           <div class="col-7">
             <!-- user-profile -->
             <div class="row">
-              <div class="col userdetails">
-                <div ng-if="profile.name">
-                  <p class="name"><b>{{profile.name}}</b></p>
-                  <p class="username">{{profile.username}}</p>
+              <div class="dropdown">
+                <div
+                  class="row"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <div class="col userdetails">
+                    <div ng-if="profile.name">
+                      <p class="name"><b>{{profile.name}}</b></p>
+                      <p class="username">{{profile.username}}</p>
+                    </div>
+                    <div ng-if="!profile.name">
+                      <p class="name"><b>{{profile.username}}</b></p>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <img
+                      class="rounded-circle w-50"
+                      ng-src="{{profile.profileImage}}"
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <div ng-if="!profile.name">
-                  <p class="name"><b>{{profile.username}}</b></p>
-                </div>
-              </div>
-              <div class="col">
-                <img
-                  class="rounded-circle w-50"
-                  ng-src="{{profile.profileImage}}"
-                  alt=""
-                />
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <button class="dropdown-item" ng-click="logOut()">
+                      Log Out
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -269,6 +310,10 @@
 
     app.controller('sportify-home-controller', ($scope, $http) => {
       const initProfile = () => {
+        if (localStorage.getItem('sportify-token') == null) {
+          location = '/login';
+        }
+
         const profileRequest = {
           url: 'http://localhost:7878/api/auth/profile',
           method: 'GET',
@@ -279,6 +324,7 @@
 
         $http(profileRequest).then(
           function success({ data }) {
+            console.log(data);
             $scope.profile = data;
           },
           function failure(response) {
@@ -324,8 +370,54 @@
         if (data.status === 'ok') {
           document.getElementById('create-activity-form').reset();
           alert('Event created!');
-          location.reload();
         }
+
+        loadEvents();
+      };
+
+      $scope.currentUserJoins = async event_id => {
+        const response = await fetch(`/api/events/add-joinee/${event_id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            user_id: $scope.profile.id,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'ok') {
+          console.log(data.message);
+        }
+
+        loadEvents();
+      };
+
+      $scope.currentUserLeaves = async event_id => {
+        const response = await fetch(`/api/events/delete-joinee/${event_id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            user_id: $scope.profile.id,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'ok') {
+          console.log(data.message);
+        }
+
+        loadEvents();
+      };
+
+      $scope.logOut = () => {
+        localStorage.removeItem('sportify-token');
+        location = '/login';
       };
     });
   </script>
