@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
@@ -23,7 +24,7 @@
     <title>sportify | Sign In</title>
   </head>
 
-  <body class="register-body">
+  <body class="register-body" ng-app="sportify-login">
     <div class="container register">
       <div class="row">
         <!-- navbar-brand -->
@@ -35,16 +36,17 @@
       <div class="card register-form">
         <div class="card-body">
           <h3 class="card-title"><b>Login</b></h3>
-          <form>
+          <form ng-controller="login-controller" ng-submit="handleLogin()">
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input
-                type="email"
-                id="login-email"
+                type="username"
+                id="login-username"
                 class="form-control border-bottom"
                 required
+                ng-model="user.username"
               />
-              <label class="form-label" for="login-email">Email address</label>
+              <label class="form-label" for="login-username">Username</label>
             </div>
 
             <!-- Password input -->
@@ -54,18 +56,12 @@
                 id="login-pass"
                 class="form-control border-bottom"
                 required
+                ng-model="user.password"
               />
               <label class="form-label" for="login-pass" data-error="wrong"
                 >Password</label
               >
             </div>
-
-            <!-- Reset Password -->
-            <!-- <div class="row mb-4">
-                        <div class="col">
-                            <a href="#!">Reset password</a>
-                        </div>
-                    </div> -->
 
             <!-- Submit button -->
             <div class="row mb-2">
@@ -83,7 +79,7 @@
             <!-- Sign up -->
             <div class="row">
               <div class="col d-flex justify-content-center">
-                <a href="/register">Don't have an account? Sign up</a>
+                <a href="/register">Don't have an account? Register!</a>
               </div>
             </div>
           </form>
@@ -91,4 +87,28 @@
       </div>
     </div>
   </body>
+
+  <script>
+    const app = angular.module('sportify-login', []);
+
+    app.controller('login-controller', $scope => {
+      $scope.handleLogin = async () => {
+        const response = await fetch('http://localhost:7878/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify($scope.user),
+        });
+        const data = await response.json();
+
+        if (data.status === 'ok') {
+          localStorage.setItem('sportify-token', data.data);
+          location = '/';
+        } else {
+          console.log(data);
+        }
+      };
+    });
+  </script>
 </html>
