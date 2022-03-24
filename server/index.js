@@ -24,6 +24,7 @@ app.use(express.static(path.resolve(__dirname, '../client/static')));
 
 app.use('/', require('./routes/public'));
 app.use('/api/auth/', require('./routes/auth'));
+app.use('/api/events/', require('./routes/events'));
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);

@@ -24,7 +24,7 @@
     <title>sportify</title>
   </head>
 
-  <body ng-app="sportify-home">
+  <body ng-app="sportify-home" ng-controller="sportify-home-controller">
     <div class="row no-gutters">
       <!-- leftside -->
       <div class="col-sm-8 leftside">
@@ -54,82 +54,32 @@
 
           <div class="row">
             <!-- activity card start-->
-            <div class="card activity-card border-0">
+            <div
+              class="card activity-card border-0"
+              ng-repeat="event in events | reverse"
+            >
               <div class="card-header">
-                Activity created by <b>Om Kamath</b>
+                Event created by <b>{{event.createdBy.name}}</b>
                 <span class="badge bg-danger rounded-pill" id="activityJoinees"
-                  >0/10 Joinees</span
+                  >{{event.joinees.length}}/10 Joinees</span
                 >
               </div>
               <div class="card-body">
-                <h5 class="card-title">Anybody up for a ride today evening?</h5>
+                <h5 class="card-title">{{event.title}}</h5>
                 <div class="card-text">
-                  <p><b>Date and Time:</b> March 11, 2022 @ 17:00</p>
-                  <p><b>Activity type:</b> Cycling</p>
-                  <p><b>Location:</b> Shivaji Park, Mumbai</p>
+                  <!-- March 11, 2022 @ 17:00 -->
+                  <p>
+                    <b>Date and Time: </b> {{event.time | date:'MMMM dd, yyyy @
+                    hh:mm a' }}
+                  </p>
+                  <p><b>Activity type: </b> {{event.type}}</p>
+                  <p><b>Location:</b> {{event.location}}</p>
                   <a
                     href="#"
                     class="btn btn-outline-dark btn-rounded"
                     data-mdb-ripple-color="dark"
                     >I'm joining</a
                   >
-                </div>
-              </div>
-            </div>
-            <!-- activity card end-->
-            <!-- activity card start -->
-            <div class="card activity-card border-0">
-              <div class="card-header">
-                Activity created by <b>Rushabh Javeri</b>
-                <span class="badge bg-danger rounded-pill" id="activityJoinees"
-                  >12/20 Joinees</span
-                >
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">
-                  Join me to improve your basketball skills 🏀
-                </h5>
-                <div class="card-text">
-                  <p><b>Date and Time:</b> March 13, 2022 @ 16:00</p>
-                  <p><b>Activity type:</b> Basketball</p>
-                  <p><b>Location:</b> Ghatkopar, Mumbai</p>
-                  <a
-                    href="#"
-                    type="button"
-                    class="btn btn-outline-dark btn-rounded"
-                    data-mdb-ripple-color="dark"
-                  >
-                    I'm joining
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- activity card end-->
-            <!-- activity card start -->
-            <div class="card activity-card border-0">
-              <div class="card-header">
-                Activity created by <b>Rushabh Javeri</b>
-                <!-- <span class="badge bg-secondary">New</span> -->
-                <span class="badge bg-danger rounded-pill" id="activityJoinees"
-                  >5/10 Joinees</span
-                >
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">
-                  Join me to improve your basketball skills 🏀
-                </h5>
-                <div class="card-text">
-                  <p><b>Date and Time:</b> March 13, 2022 @ 16:00</p>
-                  <p><b>Activity type:</b> Basketball</p>
-                  <p><b>Location:</b> Ghatkopar, Mumbai</p>
-                  <a
-                    href="#"
-                    type="button"
-                    class="btn btn-outline-dark btn-rounded"
-                    data-mdb-ripple-color="dark"
-                  >
-                    I'm joining
-                  </a>
                 </div>
               </div>
             </div>
@@ -149,22 +99,22 @@
               <h6 id="date"></h6>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-7">
             <!-- user-profile -->
-            <div class="row" ng-controller="get-profile">
+            <div class="row">
               <div class="col userdetails">
-                <div ng-if="name">
-                  <p class="name"><b>{{name}}</b></p>
-                  <p class="username">{{username}}</p>
+                <div ng-if="profile.name">
+                  <p class="name"><b>{{profile.name}}</b></p>
+                  <p class="username">{{profile.username}}</p>
                 </div>
-                <div ng-if="!name">
-                  <p class="name"><b>{{username}}</b></p>
+                <div ng-if="!profile.name">
+                  <p class="name"><b>{{profile.username}}</b></p>
                 </div>
               </div>
               <div class="col">
                 <img
                   class="rounded-circle w-50"
-                  ng-src="{{profileImage}}"
+                  ng-src="{{profile.profileImage}}"
                   alt=""
                 />
               </div>
@@ -175,19 +125,20 @@
         <!-- activity-creation  -->
         <div class="card create-event border-0 shadow-3-soft text-center">
           <div class="card-header">
-            <h1>Create Activity</h1>
+            <h1>Create Event</h1>
           </div>
           <div class="card-body">
-            <form method="post" action="/">
+            <form ng-submit="createActivity()" id="create-activity-form">
               <div class="card-text">
                 <div class="form-group">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Activity name"
+                    placeholder="Title"
                     id="activityTitle"
                     name="title"
                     required
+                    ng-model="event.title"
                   />
                 </div>
               </div>
@@ -198,13 +149,13 @@
                     id="activityType"
                     name="type"
                     required
+                    ng-model="event.type"
                   >
                     <option value="" disabled selected>Activity type</option>
-                    <option>Cycling</option>
-                    <option>Running</option>
-                    <option>Swimming</option>
-                    <option>Basketball</option>
-                    <option>Football</option>
+                    <option value="Cycling">Cycling</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Football">Football</option>
                   </select>
                 </div>
               </div>
@@ -218,6 +169,7 @@
                       id="activityLocation"
                       placeholder="Location"
                       required
+                      ng-model="event.location"
                     />
                   </div>
                 </div>
@@ -230,6 +182,7 @@
                     class="form-control"
                     id="activityTime"
                     required
+                    ng-model="event.time"
                   />
                 </div>
               </div>
@@ -243,6 +196,7 @@
                     id="activityMaxJoinees"
                     placeholder="Max. joinees"
                     required
+                    ng-model="event.maxJoinees"
                   />
                 </div>
               </div>
@@ -251,7 +205,7 @@
                 class="btn btn-dark btn-rounded"
                 id="create-activity-button"
               >
-                Create activity
+                Create
               </button>
             </form>
           </div>
@@ -282,7 +236,7 @@
       setInterval(clock, 1000);
       document.getElementById('clock').innerText = time;
 
-      (months = [
+      months = [
         'Jan',
         'Feb',
         'Mar',
@@ -295,8 +249,8 @@
         'Oct',
         'Nov',
         'Dec',
-      ]),
-        (days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+      ];
+      days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
       document.getElementById('date').innerText = `${days[date.getDay()]}, ${
         months[date.getMonth()]
@@ -306,9 +260,16 @@
     clock();
 
     const app = angular.module('sportify-home', []);
-    app.controller('get-profile', ($scope, $http) => {
-      const init = () => {
-        const request = {
+
+    app.filter('reverse', function () {
+      return function (items) {
+        return items.slice().reverse();
+      };
+    });
+
+    app.controller('sportify-home-controller', ($scope, $http) => {
+      const initProfile = () => {
+        const profileRequest = {
           url: 'http://localhost:7878/api/auth/profile',
           method: 'GET',
           headers: {
@@ -316,12 +277,9 @@
           },
         };
 
-        $http(request).then(
+        $http(profileRequest).then(
           function success({ data }) {
-            console.log(data);
-            $scope.name = data.name;
-            $scope.username = data.username;
-            $scope.profileImage = data.profileImage;
+            $scope.profile = data;
           },
           function failure(response) {
             console.error(response);
@@ -329,7 +287,46 @@
         );
       };
 
-      init();
+      initProfile();
+
+      const loadEvents = () => {
+        const eventsRequest = {
+          url: 'http://localhost:7878/api/events/',
+          method: 'GET',
+        };
+
+        $http(eventsRequest).then(
+          function success({ data }) {
+            $scope.events = data;
+          },
+          function failure(response) {
+            console.error(response);
+          }
+        );
+      };
+
+      loadEvents();
+
+      $scope.createActivity = async () => {
+        const reqBody = JSON.parse(JSON.stringify($scope.event));
+        reqBody.createdBy = $scope.profile.id;
+
+        const response = await fetch('/api/events/', {
+          method: 'POST',
+          body: JSON.stringify(reqBody),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'ok') {
+          document.getElementById('create-activity-form').reset();
+          alert('Event created!');
+          location.reload();
+        }
+      };
     });
   </script>
 </html>

@@ -93,6 +93,7 @@ router.get('/profile', async (req, res) => {
       gender: user.gender,
       location: user.location,
       name: user.name,
+      id: user._id,
     });
   } catch (err) {
     if (err.message === 'invalid token') {
