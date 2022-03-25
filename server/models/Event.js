@@ -59,7 +59,6 @@ eventSchema.pre('save', function (next) {
       coordinates = location.coords;
     }
   });
-  console.log(coordinates);
   this.locationCoords = {
     type: 'Point',
     coordinates,
