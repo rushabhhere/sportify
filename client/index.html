@@ -218,17 +218,53 @@
               </div>
               <div class="card-text">
                 <div class="form-group">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="location"
-                      id="activityLocation"
-                      placeholder="Location"
-                      required
-                      ng-model="event.location"
-                    />
-                  </div>
+                  <select
+                    class="form-control"
+                    id="activityLocation"
+                    name="location"
+                    required
+                    ng-model="event.location"
+                  >
+                    <option value="" disabled selected>
+                      Activity location
+                    </option>
+                    <option value="Andheri">Andheri</option>
+                    <option value="Mira-Bhayandar">Mira-Bhayandar</option>
+                    <option value="Bandra">Bandra</option>
+                    <option value="Borivali">Borivali</option>
+                    <option value="Goregaon">Goregaon</option>
+                    <option value="Jogeshwari">Jogeshwari</option>
+                    <option value="Juhu">Juhu</option>
+                    <option value="Kandivali">Kandivali</option>
+                    <option value="Khar">Khar</option>
+                    <option value="Malad">Malad</option>
+                    <option value="Santacruz">Santacruz</option>
+                    <option value="Vile Parle">Vile Parle</option>
+                    <option value="Bhandup">Bhandup</option>
+                    <option value="Ghatkopar">Ghatkopar</option>
+                    <option value="Kanjurmarg">Kanjurmarg</option>
+                    <option value="Kurla">Kurla</option>
+                    <option value="Mulund">Mulund</option>
+                    <option value="Nahur">Nahur</option>
+                    <option value="Powai">Powai</option>
+                    <option value="Vidyavihar">Vidyavihar</option>
+                    <option value="Vikhroli">Vikhroli</option>
+                    <option value="Chembur">Chembur</option>
+                    <option value="Govandi">Govandi</option>
+                    <option value="Mankhurd">Mankhurd</option>
+                    <option value="Trombay">Trombay</option>
+                    <option value="Antop Hill">Antop Hill</option>
+                    <option value="Byculla">Byculla</option>
+                    <option value="Colaba">Colaba</option>
+                    <option value="Dadar">Dadar</option>
+                    <option value="Fort">Fort</option>
+                    <option value="Girgaon">Girgaon</option>
+                    <option value="Kalbadevi">Kalbadevi</option>
+                    <option value="Kamathipura">Kamathipura</option>
+                    <option value="Matunga">Matunga</option>
+                    <option value="Parel">Parel</option>
+                    <option value="Tardeo">Tardeo</option>
+                  </select>
                 </div>
               </div>
               <div class="card-text">
@@ -324,6 +360,45 @@
     });
 
     app.controller('sportify-home-controller', ($scope, $http) => {
+      $scope.locations = [
+        'Andheri',
+        'Mira-Bhayandar',
+        'Bandra',
+        'Borivali',
+        'Goregaon',
+        'Jogeshwari',
+        'Juhu',
+        'Kandivali',
+        'Khar',
+        'Malad',
+        'Santacruz',
+        'Vile Parle',
+        'Bhandup',
+        'Ghatkopar',
+        'Kanjurmarg',
+        'Kurla',
+        'Mulund',
+        'Nahur',
+        'Powai',
+        'Vidyavihar',
+        'Vikhroli',
+        'Chembur',
+        'Govandi',
+        'Mankhurd',
+        'Trombay',
+        'Antop Hill',
+        'Byculla',
+        'Colaba',
+        'Dadar',
+        'Fort',
+        'Girgaon',
+        'Kalbadevi',
+        'Kamathipura',
+        'Matunga',
+        'Parel',
+        'Tardeo',
+      ];
+
       const initProfile = () => {
         if (localStorage.getItem('sportify-token') == null) {
           location = '/login';
