@@ -62,26 +62,29 @@
           <div class="row">
             <div class="col">
               <span class="text-center"><b>Username:</b></span>
-              <span id="profile-email">{{profile.username}}</span>
+              <span>{{profile.username}}</span>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="text-center"><b>Location:</b></span>
               <!-- TODO: reverse geocode -->
-              <span id="profile-location">Mumbai</span>
+              <span>Mumbai</span>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="text-center"><b>Gender:</b></span>
-              <span id="profile-gender">{{profile.gender}}</span>
+              <span>{{profile.gender}}</span>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="text-center"><b>Interests:</b></span>
-              <span id="profile-gender">{{profile.interests.join(', ')}}</span>
+              <span ng-if="profile.interests.length">
+                {{profile.interests.join(', ')}}
+              </span>
+              <span ng-if="!profile.interests.length">None</span>
             </div>
           </div>
         </div>
