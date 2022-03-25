@@ -88,7 +88,7 @@ router.get('/profile', async (req, res) => {
       status: 'ok',
       message: 'profile data received',
       username: user.username,
-      profileImage: `https://avatars.dicebear.com/api/micah/${user.username}.svg`,
+      profileImage: `https://avatars.dicebear.com/api/jdenticon/${user.name}.svg`,
       interests: user.interests,
       gender: user.gender,
       location: user.location,

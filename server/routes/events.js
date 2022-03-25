@@ -54,4 +54,12 @@ router.patch('/delete-joinee/:event_id', async (req, res) => {
   res.json({ status: 'ok', message: 'deleted one user' });
 });
 
+router.delete('/delete/:event_id', async (req, res) => {
+  const { event_id } = req.params;
+
+  const event = await Event.deleteOne({ _id: event_id });
+
+  res.json({ status: 'ok', message: 'event deleted' });
+});
+
 module.exports = router;
