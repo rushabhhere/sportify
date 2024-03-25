@@ -223,7 +223,9 @@
 
       $scope.registerUser = async () => {
         if ($scope.registrar.password === undefined) {
-          return alert('password invalid');
+          return alert(
+            'password must contain at least one lowercase letter, one uppercase letter, one number, and be at least 8 characters long'
+          );
         }
 
         if ($scope.registrar.password2 !== $scope.registrar.password) {
